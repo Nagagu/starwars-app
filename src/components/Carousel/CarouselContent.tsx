@@ -19,13 +19,13 @@ export const CarouselContent = () => {
         showStatus={false}
       >
         <Slide>
-          <img src="img/starwarscomic1.jpg" />
+          <img src="./img/starwarscomic1.jpg" />
         </Slide>
         <Slide>
-          <img src="img/starwarscomic2.jpg" />
+          <img src="./img/starwarscomic2.jpg" />
         </Slide>
         <Slide>
-          <img src="img/starwarscomic3.jpg" />
+          <img src="./img/starwarscomic3.jpg" />
         </Slide>
       </Carousel>
     </Container>
@@ -33,7 +33,6 @@ export const CarouselContent = () => {
 };
 
 const Container = styled.div`
-  padding: 10px;
   width: 100%;
   font-family: "Lato", sans-serif;
   margin: 2vh 0px;
@@ -43,5 +42,5 @@ const Container = styled.div`
 
 const Slide = styled.div`
   width: 70%;
-  margin-left: 14vw;
+  margin-left: 15vw;
 `;

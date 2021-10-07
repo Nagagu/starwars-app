@@ -11,6 +11,8 @@ export const Footer = () => (
 const Container = styled.div`
   padding: 10px;
   color: white;
+  background-color: grey;
+  margin-top: 3vh;
   flex-direction: row;
   display: flex;
   justify-content: space-between;

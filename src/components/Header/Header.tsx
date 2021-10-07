@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { SearchBar } from "../SearchBar/SearchBar";
+import { LastVisits } from "../LastVisits/LastVisits";
 // import logo from "../img/logo.png";
 
 export const Header = () => {
@@ -28,7 +29,7 @@ export const Header = () => {
             exact
             to="/home"
           >
-            Last views
+            <LastVisits />
           </NavLink>
         </NavLinkContainer>
         <NavLinkContainer>
@@ -36,7 +37,7 @@ export const Header = () => {
             activeClassName="active"
             className="nav-item nav-link"
             exact
-            to="/characterslist"
+            to="/list"
           >
             Characters List
           </NavLink>

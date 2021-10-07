@@ -1,17 +1,13 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { useQuery, gql } from "@apollo/client";
 import { Link } from "react-router-dom";
-
-interface People {
-  name: string;
-}
-
-interface AllPeople {}
+import People from "../../types/Character";
+import AllPepopleResponse, { PageInfo } from "../../types/AllPepopleResponse";
 
 const CHARACTERS_QUERY = gql`
-  {
-    allPeople(first: 10) {
+  query GetCharacterList($endcursor: String!, $startcursor: String!) {
+    allPeople(first: 10, after: $endcursor, before: $startcursor) {
       pageInfo {
         hasNextPage
         hasPreviousPage
@@ -21,6 +17,7 @@ const CHARACTERS_QUERY = gql`
       edges {
         node {
           name
+          id
           gender
           homeworld {
             name
@@ -31,23 +28,63 @@ const CHARACTERS_QUERY = gql`
   }
 `;
 export const CharactersList = () => {
-  const { data, error, loading } = useQuery(CHARACTERS_QUERY);
+  const initialPaginationObject: PageInfo = {
+    hasNextPage: false,
+    hasPreviousPage: false,
+    startCursor: "",
+    endCursor: "",
+  };
+  debugger;
+  const [pageInfo, setPageInfo] = useState(initialPaginationObject);
+  const { data, error, loading, fetchMore } = useQuery<AllPepopleResponse>(
+    CHARACTERS_QUERY,
+    {
+      variables: {
+        endcursor: pageInfo.endCursor,
+        startcursor: pageInfo.startCursor,
+      },
+    }
+  );
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error!! </p>;
 
-  const items = data.allPeople.edges.map((o: any) => o.node);
+  const charactersList = data?.allPeople?.edges ?? [];
+
+  const items = charactersList.map((o: any) => o.node);
+
+  const handleNextButton = () => {
+    setPageInfo(data?.allPeople?.pageInfo ?? initialPaginationObject);
+  };
 
   return (
     <Container>
       {items.map((o: People) => (
         <ul>
           <li>
-            <Link className="nav-item nav-link" to={`${o.name}`}>
+            <Link to={`${o.id}`}>
               <Title>{o.name}</Title>
             </Link>
           </li>
         </ul>
       ))}
+      {data?.allPeople.pageInfo.hasNextPage && (
+        <NextButton
+          onClick={() => {
+            fetchMore({
+              variables: {
+                cursor: data.allPeople.pageInfo.endCursor,
+              },
+              updateQuery: (prev, { fetchMoreResult }) => {
+                debugger;
+                return fetchMoreResult ?? prev;
+              },
+            });
+          }}
+        >
+          Next
+        </NextButton>
+      )}
     </Container>
   );
 };
@@ -63,8 +100,6 @@ const Title = styled.h1`
   letter-spacing: 0.8px;
 `;
 
-const Description = styled.p`
-  font-size: 20px;
-  font-weight: 300;
-  font-style: italic;
+const NextButton = styled.button`
+  background-color: white;
 `;
