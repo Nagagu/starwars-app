@@ -16,7 +16,7 @@ export const Header = () => {
             exact
             to="/home"
           >
-            {/* <Logo src={logo}></Logo> */}
+            <Logo></Logo>
           </NavLink>
         </NavLinkContainer>
         <NavLinkContainer>
@@ -55,8 +55,12 @@ const Container = styled.div`
   /* background-color: #04010cab; */
   padding: 0px;
 `;
-const Logo = styled.img`
-  /* background-image: url(${"img/logo.png"}); */
+const Logo = styled.div`
+  width: 5vw;
+  height: 8vh;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("./img/logo.png");
 `;
 
 const NavLinkContainer = styled.div`

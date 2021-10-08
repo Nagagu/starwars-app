@@ -33,7 +33,7 @@ export const CarouselContent = () => {
 };
 
 const Container = styled.div`
-  width: 100%;
+  width: 70%;
   font-family: "Lato", sans-serif;
   margin: 2vh 0px;
   padding: 0px;
@@ -41,6 +41,6 @@ const Container = styled.div`
 `;
 
 const Slide = styled.div`
-  width: 70%;
+  width: 100%;
   margin-left: 15vw;
 `;

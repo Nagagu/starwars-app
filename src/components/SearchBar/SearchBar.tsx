@@ -32,7 +32,7 @@ const Container = styled.div`
   color: white;
 `;
 const Input = styled.input`
-  font-size: 18px;
+  font-size: 0.8vw;
   padding: 10px;
   margin: 10px;
   background: #cbdbf3;

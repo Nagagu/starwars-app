@@ -8,11 +8,7 @@ export const LastVisits = () => {
   let lastCharacters: CharacterItem[] = JSON.parse(lastCharactersAsJson);
   return (
     <Container>
-      {/* {lastCharacters.map((o) => (
-        <ul>
-          <li>{o.name}</li>
-        </ul>
-      ))} */}
+      <p>Last visits</p>
       <ol>
         {lastCharacters.map((o, i) => (
           <li>

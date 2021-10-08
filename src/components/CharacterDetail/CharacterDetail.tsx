@@ -70,43 +70,61 @@ export const CharacterDetail: React.FC<RouteComponentProps<TParams>> = ({
   }
   return (
     <Container>
-      {person && (
-        <>
-          <Title>{person.name}</Title>
-          <Description>
-            <ul>
-              <li>Gender: {person.gender}</li>
-              <li>Height: {person.height}</li>
-              <li>BirthYear: {person.birthyear}</li>
-              <li>Homeworld: {person.homeworld.name}</li>
-              <li>Films: {person.filmConnection.films.map((p) => p.title)}</li>
-            </ul>
-          </Description>
-        </>
-      )}
+      <ItemDetail>
+        {person && (
+          <>
+            <Title>{person.name}</Title>
+            <Description>
+              <ul>
+                <li>Gender: {person.gender}</li>
+                <li>Height: {person.height}</li>
+                <li>BirthYear: {person.birthyear}</li>
+                <li>Homeworld: {person.homeworld.name}</li>
+                <li>
+                  Films:{" "}
+                  {person.filmConnection.films.map((p) => p.title + ". ")}
+                </li>
+              </ul>
+            </Description>
+          </>
+        )}
+      </ItemDetail>
     </Container>
   );
 };
 
 const Container = styled.div`
-  background-color: #f5f4f473;
-  /* background-image: url("img/hojacuadros.jpg"); */
-  padding: 10px;
   width: 100%;
   height: 100%;
   font-family: "Lato", sans-serif;
-  margin: 2vh 0px;
-  padding: 0px;
-  /* background-color: #04010cab; */
+
+  background-image: url("./img/nave.jpg");
+  background-position: center;
+  background-size: contain;
+`;
+
+const ItemDetail = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background-color: #0b202894;
+  align-items: center;
+  justify-content: center;
 `;
 const Title = styled.h1`
-  margin: 5vw;
+  width: 30%;
+  font-size: 8vh;
+  padding: 2vh 10vw;
   letter-spacing: 0.8px;
-  color: #0a0a0a;
+  color: #f7fb08;
+  text-shadow: 2px 2px 2px #0b0c42;
 `;
 
 const Description = styled.div`
-  margin: 5vw;
+  font-size: 3vh;
+  line-height: 4em;
+  padding: 2vh 10vw;
   letter-spacing: 0.8px;
-  color: #0a0a0a;
+  color: #f7fb08;
+  text-shadow: 2px 2px 2px #0b0c42;
 `;

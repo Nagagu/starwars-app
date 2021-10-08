@@ -36,67 +36,71 @@ export const CharactersList = ({ charactersPerPage = 10 }) => {
 
   return (
     <Container>
-      <ItemsList>
-        {items.map((o: People) => (
-          <ul>
-            <li>
-              <Link to={`${o.id}`}>
-                <Title>{o.name}</Title>
-              </Link>
-            </li>
-          </ul>
-        ))}
-        {hasPrevious && (
-          <button
-            onClick={() =>
-              fetchMore({
-                query: PREVIOUS_CHARACTERS_QUERY,
-                variables: {
-                  before: data?.allPeople.pageInfo.startCursor,
-                  last: charactersPerPage,
-                },
-                updateQuery: (previousResult, { fetchMoreResult }) => {
-                  if (!fetchMoreResult) {
-                    return previousResult;
-                  }
-                  const fetchMoreEdges = fetchMoreResult.allPeople.edges;
+      <ListContainer>
+        <ItemsList>
+          {items.map((o: People) => (
+            <ul>
+              <li>
+                <Link to={`${o.id}`}>
+                  <Title>{o.name}</Title>
+                </Link>
+              </li>
+            </ul>
+          ))}
+        </ItemsList>
+        <ButtonsPagination>
+          {hasPrevious && (
+            <Button
+              onClick={() =>
+                fetchMore({
+                  query: PREVIOUS_CHARACTERS_QUERY,
+                  variables: {
+                    before: data?.allPeople.pageInfo.startCursor,
+                    last: charactersPerPage,
+                  },
+                  updateQuery: (previousResult, { fetchMoreResult }) => {
+                    if (!fetchMoreResult) {
+                      return previousResult;
+                    }
+                    const fetchMoreEdges = fetchMoreResult.allPeople.edges;
 
-                  fetchMoreResult.allPeople.edges = [...fetchMoreEdges];
-                  return { ...fetchMoreResult };
-                },
-              })
-            }
-          >
-            Previous
-          </button>
-        )}
+                    fetchMoreResult.allPeople.edges = [...fetchMoreEdges];
+                    return { ...fetchMoreResult };
+                  },
+                })
+              }
+            >
+              Prev
+            </Button>
+          )}
 
-        {/* {data?.allPeople.pageInfo.hasNextPage && ( */}
-        {hasNext && (
-          <button
-            onClick={() =>
-              fetchMore({
-                variables: {
-                  after: data?.allPeople.pageInfo.endCursor,
-                  first: charactersPerPage,
-                },
-                updateQuery: (previousResult, { fetchMoreResult }) => {
-                  if (!fetchMoreResult) {
-                    return previousResult;
-                  }
-                  const fetchMoreEdges = fetchMoreResult.allPeople.edges;
+          {/* {data?.allPeople.pageInfo.hasNextPage && ( */}
+          {hasNext && (
+            <Button
+              onClick={() =>
+                fetchMore({
+                  variables: {
+                    after: data?.allPeople.pageInfo.endCursor,
+                    first: charactersPerPage,
+                  },
+                  updateQuery: (previousResult, { fetchMoreResult }) => {
+                    if (!fetchMoreResult) {
+                      return previousResult;
+                    }
+                    const fetchMoreEdges = fetchMoreResult.allPeople.edges;
 
-                  fetchMoreResult.allPeople.edges = [...fetchMoreEdges];
+                    fetchMoreResult.allPeople.edges = [...fetchMoreEdges];
 
-                  return { ...fetchMoreResult };
-                },
-              })
-            }
-          >
-            Next
-          </button>
-        )}
-      </ItemsList>
+                    return { ...fetchMoreResult };
+                  },
+                })
+              }
+            >
+              Next
+            </Button>
+          )}
+        </ButtonsPagination>
+      </ListContainer>
     </Container>
   );
 };
@@ -105,22 +109,43 @@ export const CharactersList = ({ charactersPerPage = 10 }) => {
 
 const Container = styled.div`
   width: 100%;
+  height: 100%;
   font-family: "Lato", sans-serif;
-  margin: 2vh 0px;
   padding: 0px;
+  /* margin-left: 15vw; */
+  background-image: url("./img/nave.jpg");
+  background-position: center;
+  background-size: contain;
 `;
-
-const ItemsList = styled.div`
-  width: 70%;
-  margin-left: 15vw;
-  background-color: #6b8581;
+const ItemsList = styled.div``;
+const ListContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  font-size: 1.3vh;
+  background-color: #0b202894;
+  padding: 4vh 0px;
+  text-align: center;
 `;
 
 const Title = styled.h1`
   margin: 1em 0 0 0;
   letter-spacing: 0.8px;
+  color: #f7fb08;
+  text-shadow: 2px 2px 2px #0b0c42;
 `;
 
-const NextButton = styled.button`
-  background-color: white;
+const ButtonsPagination = styled.div``;
+
+const Button = styled.button`
+  padding: 1vh 3vw;
+  width: 9vw;
+  margin: 8vh 2vw 0px;
+  text-align: center;
+  margin-right: 2vw;
+  font-family: Arial;
+  background-color: #aeb5b4;
+  font-size: 1.8em;
+  border-radius: 45px;
+  font-weight: bold;
+  cursor: pointer;
 `;
