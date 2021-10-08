@@ -35,12 +35,12 @@ export const CarouselContent = () => {
 const Container = styled.div`
   width: 70%;
   font-family: "Lato", sans-serif;
-  margin: 2vh 0px;
+  margin: 2vh 15vw 5vh;
   padding: 0px;
   /* background-color: #04010cab; */
 `;
 
 const Slide = styled.div`
   width: 100%;
-  margin-left: 15vw;
+  /* margin-left: 15vw; */
 `;

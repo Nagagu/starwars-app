@@ -39,7 +39,7 @@ export const Header = () => {
             exact
             to="/list"
           >
-            Characters List
+            Characters
           </NavLink>
         </NavLinkContainer>
       </Container>
@@ -64,6 +64,6 @@ const Logo = styled.div`
 `;
 
 const NavLinkContainer = styled.div`
-  padding: 2vh 3vw;
+  padding: 1vh 3vw;
   align-self: center;
 `;

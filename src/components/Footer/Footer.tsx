@@ -3,16 +3,17 @@ import styled from "styled-components";
 
 export const Footer = () => (
   <Container>
-    <Logo>LOGO</Logo>
-    <p>Natalia Garrido 2021 ©</p>
+    <Logo></Logo>
+    <Copyright>Natalia Garrido 2021 ©</Copyright>
   </Container>
 );
 
 const Container = styled.div`
   padding: 10px;
+  margin-bottom: 0;
   color: white;
+  padding: 1vh 2vw;
   background-color: grey;
-  margin-top: 3vh;
   flex-direction: row;
   display: flex;
   justify-content: space-between;
@@ -20,7 +21,14 @@ const Container = styled.div`
 `;
 
 const Logo = styled.div`
-  color: white;
-  margin: 1em 0 0 0;
-  letter-spacing: 0.8px;
+  width: 3vw;
+  height: 6vh;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-image: url("./img/logo.png");
+`;
+
+const Copyright = styled.p`
+  align-self: center;
 `;

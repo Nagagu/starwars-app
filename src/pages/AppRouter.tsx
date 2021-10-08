@@ -44,7 +44,7 @@ export const AppRouter = () => {
 const Container = styled.div`
   display: flex;
   width: 100%;
-  height: 100vh;
+  height: auto;
   flex-direction: column;
   justify-content: space-between;
   /* background-color: #04010cab; */
